@@ -100,5 +100,6 @@ input{
     grid-auto-rows: auto;
 }
 .player-grid{
-    
+    padding: 10px;
+    margin: 10px;
 }

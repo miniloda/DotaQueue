@@ -2,9 +2,10 @@ let input = document.querySelector('input');
 let parent = document.getElementsByClassName('results-container')[0];
 input.addEventListener("keypress", function(e){
     if(e.key === "Enter"){
-        parent.innerHTML = '';
+        parent.innerHTML = 'Loading...';
         let query = input.value;
         getData(query, function(err, data) {
+            
             if (err) {
                 console.log(err);
             } else {
@@ -16,13 +17,12 @@ input.addEventListener("keypress", function(e){
                 parent.appendChild(h1);
                 return;
                }
-               console.log(res)
                name = res['name'];
                team_id = res['id'];
                searchPlayers(team_id, function(active){
                     activePlayers = active;
-                     console.log(activePlayers);
                      let h1 = document.createElement('h1');
+                parent.innerHTML = "";
                 h1.innerHTML = name;
                 parent.appendChild(h1);
                 for(const player of activePlayers){
@@ -68,12 +68,14 @@ function getData(url, callback) {
 function findTeam(team, data){
     let teamFound = false;
     for (let i = 0; i < data.length; i++) {
-        if (String(data[i].name).toLowerCase() === team.toLowerCase()) {
+        // get the acronym from a string
+        let teamName = data[i].name;
+        let teamAcronym = teamName.split(' ').map(word => word[0]).join('');
+
+        if (String(data[i].name).toLowerCase() === team.toLowerCase() || String(teamAcronym).toLowerCase() === team.toLowerCase()) {
             let name = data[i].name;
             let id = data[i].team_id;
             let logo = data[i].logo;
-            console.log(data[i].name);
-            console.log(data[i]);
             return {
                 name,id, logo}
                 ;
@@ -83,7 +85,6 @@ function findTeam(team, data){
 
 }
 function searchPlayers(team_id, callback){
-    console.log(team_id)
     url = `https://api.opendota.com/api/teams/${team_id}/players`;
     let xhr = new XMLHttpRequest();
     xhr.open('GET', url);
