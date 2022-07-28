@@ -14,4 +14,4 @@ Search Engine for a dota 2 team, players, and their upcoming matches using open 
 - [ ] Add footers
 ## Live Server: https://miniloda.github.io/DotaQueue
 
-![video demo](video.webm)
+[video.webm](https://user-images.githubusercontent.com/90799133/181496168-4c41c969-8797-4b0f-8645-d8289ec85b0a.webm)
