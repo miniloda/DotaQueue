@@ -12,6 +12,9 @@ const teamInfo = document.getElementsByClassName('team-info')[0];
 // TODO: Add team stats
 input.addEventListener("keypress", function(e){
     if(e.key === "Enter"){
+        if (input.value.length == 0 ) {
+            return;
+        }
         parent.innerHTML = 'Loading...';
         let query = input.value;
         getData(query, function(err, data) {
@@ -21,12 +24,13 @@ input.addEventListener("keypress", function(e){
                res =  findTeam(query, data);
                if(res === false){
                 let h1 = document.createElement('h1');
+                parent.innerHTML = '';
                 h1.innerHTML = "Team not found";
                 parent.appendChild(h1);
                 return;
                }
             //    Clean all divs
-               parent.innerHTML = '';
+                parent.innerHTML = '';
                 team.innerHTML = '';
                 imgDiv.innerHTML = '';
                 nameDiv.innerHTML = '';
@@ -60,7 +64,6 @@ input.addEventListener("keypress", function(e){
                 teamLogoEl.style.backgroundColor = "black";
                 teamLogoEl.style.width = "100px";
                 // Append elements
-                
                 console.log(team);
                 imgDiv.appendChild(teamLogoEl);
                 nameDiv.appendChild(teamNameEl);
@@ -128,7 +131,7 @@ function findTeam(team, data){
     for (let i = 0; i < data.length; i++) {
         // get the acronym from a string
 
-        if (String(data[i].name).toLowerCase() === team.toLowerCase() || String(data[i].tag).toLowerCase() === team.toLowerCase()) {
+        if (String(data[i].name).toLowerCase() === team.toLowerCase().trim() || String(data[i].tag).toLowerCase() === team.toLowerCase().trim()) {
             let name = data[i].name;
             let id = data[i].team_id;
             let logo = data[i].logo_url;
