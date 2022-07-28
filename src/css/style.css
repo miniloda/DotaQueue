@@ -1,0 +1,104 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+main{
+    width: 100vw;
+}
+.image-container>img{
+    width: 100%;
+    height: auto;
+}
+.image-container{
+    max-width: 400px;
+    max-height: 400px;
+    height: 100%;
+    display:flex;
+    align-items: flex-end;
+    
+}
+.dota-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100vw;
+    height: 300px;
+    margin-bottom: 5px;
+}
+.search-container{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100vw;
+    margin-top: 20px;
+}
+.search-bar{
+    width: 80%;
+    max-width: 600px;
+    min-width: 300px;
+    height: 20px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.search-bar:focus{
+    outline: none;
+}
+.search-bar:focus::-webkit-input-placeholder{
+    color: #ccc;
+}
+.search-logo{
+    margin-left: 5px;
+    margin-top: -2px;
+}
+.search-input{
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: none;
+    
+}
+input{
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: none;
+    margin-top:-2px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    font-family: arial,sans-serif;
+    color: #202124;
+    margin-left: 10px;
+    background: transparent;
+}
+.remove{
+    display: none;
+    margin-right:10px;
+    margin-top: 2px;
+    cursor:pointer;
+}
+.results-container{
+    margin: 0 auto;
+    width: 400px;
+    display: grid;
+    grid-template-columns: repeat(1fr, minmax(200px, 1fr));
+    grid-gap: 10px;
+    margin-top: 10px;
+    grid-auto-rows: auto;
+}
+.player-grid{
+    
+}

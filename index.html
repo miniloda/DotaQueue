@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Dota Queue</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="src/css/style.css">
+        <script src="https://kit.fontawesome.com/d5eb826ace.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <header></header>
+        <main>
+            <div class="dota-container">
+                <div class = "image-container">
+                    <img src="dota.jpg" alt="Dota Logo">
+                   
+                </div>
+                <del>Can only query players of a team as of now</del>
+            </div>
+            <div class = "search-container">
+                <div class="search-bar">
+                    <div class = "search-logo">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <div class = "search-input">
+                        <input type="text" placeholder="Search for a team">
+                </div>
+                <div class = "remove">
+                    <i class="fa-solid fa-times"></i>
+                </div>
+            </div>
+            </div>
+            <div class = "results-container">
+                <div class = "player-grid">
+                    
+                </div>
+            </div>
+        </main>
+        <script src="src/scripts/api.js" async defer></script>
+        <script src="src/scripts/script.js" async defer></script>
+    </body>
+</html>
