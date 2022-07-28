@@ -1,7 +1,7 @@
 # DotaQueue
 Search Engine for a dota 2 team, players, and their upcoming matches using open dota API
 
-![wakatime stats](https://wakatime.com/badge/user/f5331c0b-eb4e-443c-b006-aaadd1d3f780/project/45d3fcf5-7121-4860-ac3b-68f51bf47ff2.svg)
+[![wakatime](https://wakatime.com/badge/github/miniloda/DotaQueue.svg)](https://wakatime.com/badge/github/miniloda/DotaQueue)
 ## Update:
 - [x] Can only search the players for a team
 - [x] Basic layout and design
