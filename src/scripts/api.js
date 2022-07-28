@@ -5,12 +5,13 @@ input.addEventListener("keypress", function(e){
         parent.innerHTML = 'Loading...';
         let query = input.value;
         getData(query, function(err, data) {
-            
+           
             if (err) {
                 console.log(err);
             } else {
                let name, id, activePlayers;
                res =  findTeam(query, data);
+               
                if(res === false){
                 let h1 = document.createElement('h1');
                 h1.innerHTML = "Team not found";
@@ -24,7 +25,11 @@ input.addEventListener("keypress", function(e){
                      let h1 = document.createElement('h1');
                 parent.innerHTML = "";
                 h1.innerHTML = name;
+                let img = document.createElement('img');
+                img.src = res['logo'];
+                img.style.backgroundColor = "black";
                 parent.appendChild(h1);
+                parent.appendChild(img);
                 for(const player of activePlayers){
                     let player_id = player.account_id;
                     playerSearch(player_id, function(data){
@@ -69,13 +74,12 @@ function findTeam(team, data){
     let teamFound = false;
     for (let i = 0; i < data.length; i++) {
         // get the acronym from a string
-        let teamName = data[i].name;
-        let teamAcronym = teamName.split(' ').map(word => word[0]).join('');
 
-        if (String(data[i].name).toLowerCase() === team.toLowerCase() || String(teamAcronym).toLowerCase() === team.toLowerCase()) {
+        if (String(data[i].name).toLowerCase() === team.toLowerCase() || String(data[i].tag).toLowerCase() === team.toLowerCase()) {
             let name = data[i].name;
             let id = data[i].team_id;
-            let logo = data[i].logo;
+            let logo = data[i].logo_url;
+            console.log(data[i])
             return {
                 name,id, logo}
                 ;
