@@ -1,5 +1,9 @@
 let input = document.querySelector('input');
 let parent = document.getElementsByClassName('results-container')[0];
+// TODO: Add matches
+// TODO: Add stats
+// TODO: Add description
+
 input.addEventListener("keypress", function(e){
     if(e.key === "Enter"){
         parent.innerHTML = 'Loading...';
