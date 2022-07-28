@@ -1,11 +1,14 @@
 # DotaQueue
 Search Engine for a dota 2 team, players, and their upcoming matches using open dota API
+#### Start Date: July 28,2022
 
 [![wakatime](https://wakatime.com/badge/github/miniloda/DotaQueue.svg)](https://wakatime.com/badge/github/miniloda/DotaQueue)
 ## Update:
 - [x] Can only search the players for a team
 - [x] Basic layout and design
+- [x] Added team stats
 ## TO-DO:
+- [ ] Add player stats
 - [ ] Add Matches
 - [ ] Add Stats
 - [ ] Add layout

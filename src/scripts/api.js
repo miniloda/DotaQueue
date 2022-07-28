@@ -1,40 +1,86 @@
-let input = document.querySelector('input');
-let parent = document.getElementsByClassName('results-container')[0];
+const input = document.querySelector('input');
+const parent = document.getElementsByClassName('results-container')[0];
+const team = document.getElementsByClassName('team-grid')[0];
+//    Assign variables for the divs, check html
+const imgDiv = document.getElementsByClassName('team-img')[0];
+const nameDiv = document.getElementsByClassName('team-name')[0];
+const teamInfo = document.getElementsByClassName('team-info')[0];
+
 // TODO: Add matches
 // TODO: Add stats
 // TODO: Add description
-
+// TODO: Add team stats
 input.addEventListener("keypress", function(e){
     if(e.key === "Enter"){
         parent.innerHTML = 'Loading...';
         let query = input.value;
         getData(query, function(err, data) {
-           
             if (err) {
                 console.log(err);
             } else {
-               let name, id, activePlayers;
                res =  findTeam(query, data);
-               
                if(res === false){
                 let h1 = document.createElement('h1');
                 h1.innerHTML = "Team not found";
                 parent.appendChild(h1);
                 return;
                }
-               name = res['name'];
-               team_id = res['id'];
+            //    Clean all divs
+               parent.innerHTML = '';
+                team.innerHTML = '';
+                imgDiv.innerHTML = '';
+                nameDiv.innerHTML = '';
+                teamInfo.innerHTML = '';
+            //    For the team grid
+            // Assign variables for values
+                let teamName = res['name'];
+                let teamLosses = res['losses'];
+                let teamWins = res['wins'];
+                let teamWinRate = res['win_rate'];
+                let teamRating = res['rating'];
+                let teamLogo = res['logo'];
+                let teamTag = res['tag'];
+                // Create elements
+                let teamNameEl = document.createElement('h2');
+                let teamLogoEl = document.createElement('img');
+                let teamRatingEl = document.createElement('p');
+                let teamWinsEl = document.createElement('p');
+                let teamLossesEl = document.createElement('p');
+                let teamWinRateEl = document.createElement('p');
+                let teamTagEl = document.createElement('p');
+                // Add attributes
+                teamNameEl.innerHTML = teamName;
+                teamLogoEl.src = teamLogo;
+                teamRatingEl.innerHTML = `Rating: ${teamRating}`;
+                teamWinsEl.innerHTML = `Wins: ${teamWins}`;
+                teamLossesEl.innerHTML = `Losses: ${teamLosses}`;
+                teamWinRateEl.innerHTML = `Win Rate: ${teamWinRate}%`;
+                teamTagEl.innerHTML = teamTag;
+                //  Add attributes
+                teamLogoEl.style.backgroundColor = "black";
+                teamLogoEl.style.width = "100px";
+                // Append elements
+                
+                console.log(team);
+                imgDiv.appendChild(teamLogoEl);
+                nameDiv.appendChild(teamNameEl);
+                nameDiv.appendChild(teamTagEl);
+                teamInfo.appendChild(teamRatingEl);
+                teamInfo.appendChild(teamWinsEl);
+                teamInfo.appendChild(teamLossesEl);
+                teamInfo.appendChild(teamWinRateEl);
+                team.appendChild(imgDiv);
+                team.appendChild(nameDiv);
+                team.appendChild(teamInfo);
+                parent.appendChild(team)
+
+               team_id = res['id']; // Find the players using teamID
+
+            //    For the player grid
                searchPlayers(team_id, function(active){
-                    activePlayers = active;
-                     let h1 = document.createElement('h1');
-                parent.innerHTML = "";
-                h1.innerHTML = name;
-                let img = document.createElement('img');
-                img.src = res['logo'];
-                img.style.backgroundColor = "black";
-                parent.appendChild(h1);
-                parent.appendChild(img);
+                activePlayers = active;
                 for(const player of activePlayers){
+                    // For each player, add a layout which is in the style.css
                     let player_id = player.account_id;
                     playerSearch(player_id, function(data){
                     let personaName = document.createElement('h2')
@@ -44,23 +90,26 @@ input.addEventListener("keypress", function(e){
                     let accountID = document.createElement('p')
                     accountID.innerHTML = player.account_id;
                     let avatar = document.createElement('img');
-                    avatar.src = data.profile.avatarfull;
+                    avatar.src = data.profile.avatarmedium;
                     let playerDiv = document.createElement('div');
                     playerDiv.appendChild(personaName);
                     // playerDiv.appendChild(playerName);
                     playerDiv.appendChild(accountID);
                     playerDiv.appendChild(avatar);
                     parent.appendChild(playerDiv);
+                    return;
                     });
                 }
                });
             }
         })
     }
+    return
 });
 
 
 function getData(url, callback) {
+    // Gets the data from OpenDota API
     url = "https://api.opendota.com/api/teams/";
     let xhr = new XMLHttpRequest();
     xhr.open('GET', url);
@@ -83,9 +132,14 @@ function findTeam(team, data){
             let name = data[i].name;
             let id = data[i].team_id;
             let logo = data[i].logo_url;
-            console.log(data[i])
+            teamFound = true;
+            let rating = data[i].rating;
+            let wins = data[i].wins;
+            let losses = data[i].losses;
+            let tag = data[i].tag;
+            let win_rate = ((wins / (wins + losses)) * 100).toFixed(2);
             return {
-                name,id, logo}
+                name,id, logo, rating, wins, losses, win_rate, tag}
                 ;
         }
     }

@@ -99,7 +99,22 @@ input{
     margin-top: 10px;
     grid-auto-rows: auto;
 }
+/* Player's stats */
 .player-grid{
     padding: 10px;
     margin: 10px;
 }
+/* team stats */
+.team-grid{
+   display:flex;
+   justify-content: space-around;
+    width: 100%;
+    height: auto;
+
+}
+.team-img{
+    width: 100px;
+    height: 100px;
+}
+
+
