@@ -6,6 +6,8 @@ body{
 }
 main{
     width: 100vw;
+    height: 100%;
+    min-height: 100vh;
 }
 .image-container>img{
     width: 100%;
@@ -98,6 +100,8 @@ input{
     grid-gap: 10px;
     margin-top: 10px;
     grid-auto-rows: auto;
+    height: auto;
+    margin-bottom: 10px;
 }
 /* Player's stats */
 .player-grid{
@@ -115,6 +119,22 @@ input{
 .team-img{
     width: 100px;
     height: 100px;
+}
+
+.footer-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 50px;
+    background: #202124;
+    color: #fff;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 

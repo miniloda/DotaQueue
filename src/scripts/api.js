@@ -5,11 +5,19 @@ const team = document.getElementsByClassName('team-grid')[0];
 const imgDiv = document.getElementsByClassName('team-img')[0];
 const nameDiv = document.getElementsByClassName('team-name')[0];
 const teamInfo = document.getElementsByClassName('team-info')[0];
-
+let APIData;
 // TODO: Add matches
 // TODO: Add stats
 // TODO: Add description
 // TODO: Add team stats
+window.onload = () => {
+    // Get the data from the API for the team once
+    getData((err, data)=>
+    {
+        APIData = data;
+    })
+}
+
 input.addEventListener("keypress", function(e){
     if(e.key === "Enter"){
         if (input.value.length == 0 ) {
@@ -17,11 +25,7 @@ input.addEventListener("keypress", function(e){
         }
         parent.innerHTML = 'Loading...';
         let query = input.value;
-        getData(query, function(err, data) {
-            if (err) {
-                console.log(err);
-            } else {
-               res =  findTeam(query, data);
+               res =  findTeam(query, APIData);
                if(res === false){
                 let h1 = document.createElement('h1');
                 parent.innerHTML = '';
@@ -29,7 +33,14 @@ input.addEventListener("keypress", function(e){
                 parent.appendChild(h1);
                 return;
                }
-            //    Clean all divs
+
+               team_id = res['id']; // Find the players using teamID
+
+            //    For the player grid
+               searchPlayers(team_id, function(active){
+                activePlayers = active;
+                //    For the team grid, assign it here
+                //    Clean all divs
                 parent.innerHTML = '';
                 team.innerHTML = '';
                 imgDiv.innerHTML = '';
@@ -76,12 +87,6 @@ input.addEventListener("keypress", function(e){
                 team.appendChild(nameDiv);
                 team.appendChild(teamInfo);
                 parent.appendChild(team)
-
-               team_id = res['id']; // Find the players using teamID
-
-            //    For the player grid
-               searchPlayers(team_id, function(active){
-                activePlayers = active;
                 for(const player of activePlayers){
                     // For each player, add a layout which is in the style.css
                     let player_id = player.account_id;
@@ -105,14 +110,14 @@ input.addEventListener("keypress", function(e){
                 }
                });
             }
-        })
-    }
     return
 });
 
 
-function getData(url, callback) {
+function getData(callback) {
     // Gets the data from OpenDota API
+    // Call one time to avoid making duplicate calls
+    // REFACTOR: Perform sorting of the name to make it easier to find the team using binary search
     url = "https://api.opendota.com/api/teams/";
     let xhr = new XMLHttpRequest();
     xhr.open('GET', url);
