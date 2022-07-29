@@ -1,3 +1,4 @@
+
 const input = document.querySelector('input');
 const parent = document.getElementsByClassName('results-container')[0];
 const team = document.getElementsByClassName('team-grid')[0];
@@ -10,14 +11,15 @@ let APIData;
 // TODO: Add stats
 // TODO: Add description
 // TODO: Add team stats
-window.onload = () => {
-    // Get the data from the API for the team once
-    getData((err, data)=>
+// window.onload = () => {
+// Get the data from the API for the team once
+getData((err, data)=>
     {
         APIData = data;
+       console.log(APIData);
     })
-}
-
+// }
+console.log(APIData);
 input.addEventListener("keypress", function(e){
     if(e.key === "Enter"){
         if (input.value.length == 0 ) {
@@ -114,7 +116,7 @@ input.addEventListener("keypress", function(e){
 });
 
 
-function getData(callback) {
+async function getData(callback) {
     // Gets the data from OpenDota API
     // Call one time to avoid making duplicate calls
     // REFACTOR: Perform sorting of the name to make it easier to find the team using binary search

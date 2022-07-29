@@ -1,5 +1,4 @@
 let remove = document.getElementsByClassName('remove')[0];
- 
 
 document.querySelector('input').addEventListener('keyup', function() {
     console.log("?")
